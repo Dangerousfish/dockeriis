@@ -7,8 +7,9 @@ MAINTAINER https://github.com/Dangerousfish
 # Uses dism.exe to install the IIS role.
 RUN dism.exe /online /enable-feature /all /featurename:iis-webserver /NoRestart
 
-RUN powershell -NoProfile -Command Remove-Item -Recurse C:\inetpub\wwwroot\*
-
+# Sets directory container should work from
 WORKDIR /inetpub/wwwroot
 
-COPY content/ .
+# The COPY instruction copies files and directories to the filesystem of the container. The files and directories need to be in a path relative to the Dockerfile.
+
+COPY IIS_Content/ .
